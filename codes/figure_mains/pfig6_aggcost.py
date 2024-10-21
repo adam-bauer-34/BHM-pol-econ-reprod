@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 import matplotlib.transforms as mtransforms
 import xarray as xr
 
-from .src.presets import get_presets
+from src.presets import get_presets
 
 # parse command line input
 cal = sys.argv[1]

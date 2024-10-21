@@ -15,7 +15,7 @@ import xarray as xr
 import matplotlib.pyplot as plt
 import matplotlib.transforms as mtransforms
 
-from .src.presets import get_presets
+from src.presets import get_presets
 
 # ignore future warnings :)
 import warnings

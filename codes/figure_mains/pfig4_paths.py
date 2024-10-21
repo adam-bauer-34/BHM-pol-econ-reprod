@@ -17,8 +17,8 @@ import xarray as xr
 import matplotlib.pyplot as plt
 import matplotlib.transforms as mtransforms
 
-from .src.expost_paths import get_investment_path
-from .src.presets import get_presets
+from src.expost_paths import get_investment_path
+from src.presets import get_presets
 
 # parse command line
 cal = sys.argv[1]
