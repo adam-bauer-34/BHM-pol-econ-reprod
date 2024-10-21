@@ -16,7 +16,7 @@ import pandas as pd
 import xarray as xr
 
 from scipy.optimize import fsolve
-from .src.analytics import get_decarb_time_and_price, get_delay, total_cost, Bstar_pieces
+from src.analytics import get_decarb_time_and_price, get_delay, total_cost, Bstar_pieces
 
 # get rid of stupid future warnings stuff, can delete in the future if
 # necessary (lol)
