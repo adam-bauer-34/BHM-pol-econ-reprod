@@ -4,7 +4,7 @@ By: Adam Michael Bauer -- adammb4 [at] illinois [dot] edu
 
 This directory contains a set of codes that reproduces all of the figures and analysis carried out in: *The Timing Versus Allocation Trade-off in Politically Constrained Climate Policies* by Bauer, Hallegatte, and McIsaac.
 
-To cite our working paper that uses these codes: [Bauer, A. M., S. Hallegatte, F. McIsaac. *The Timing Versus Allocation Trade-off in Politically Constrained Cliamte Policies*. World Bank Policy Research Working Paper Series, No. XXXXX, The World Bank, Washington DC, 2024.](https://www.ambauer.com)
+To cite our working paper that uses these codes: [Bauer, A. M., S. Hallegatte, F. McIsaac. *The Timing Versus Allocation Trade-off in Politically Constrained Climate Policies*. World Bank Policy Research Working Paper Series, No. XXXXX, The World Bank, Washington DC, 2024.](https://www.ambauer.com)
 
 All of the data used in our study is taken and/or interpreted from publically available publications and reports. Raw data is used to calibrate the numerical model. Individual numbers used in the simulations can be found in the `codes/data/cal/` files for each simulation. All values are taken from the following papers or reports:
 
