@@ -43,7 +43,6 @@ ds3 = xr.open_dataset(datapath + file_3, engine='netcdf4')
 ds4 = xr.open_dataset(datapath + file_4, engine='netcdf4')
 
 param_df = pd.read_csv(inputpath)
-print(param_df)
 
 # define all the individual pieces
 
@@ -245,7 +244,7 @@ fig.subplots_adjust(wspace=0.3, hspace=0.3)
 if save_figs:
     fig.savefig(basefile + cal + "_pfig3_EOL.png", dpi=400,
                 bbox_inches='tight')
-    print("Figure saved to:\n {}".format(basefile))
+    print("Figure saved to:\n {}".format(basefile + cal + '_pfig3_EOL.png'))
 
 else:
     plt.show()

@@ -131,7 +131,6 @@ for i in range(len(ds4.sector.values)):
 
     if i == 3:
         x_counter += 1
-exp_string_5 = "Additional cost of Policy Response 4 for a decade of delay: "
         y_counter = 0
     else:
         y_counter += 1
@@ -165,6 +164,8 @@ fig.subplots_adjust(wspace=0.4, hspace=0.4)
 if save_output:
     fig.savefig(basefile + cal + '_pfig1_decarb_dates_val.png', dpi=400,
                 bbox_inches='tight')
+    print("Figure saved to: {}".format(basefile + cal +
+                                       '_pfig1_decarb_dates_val.png'))
 
 else:
     plt.show()

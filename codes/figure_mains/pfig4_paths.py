@@ -46,8 +46,8 @@ ds3 = xr.open_dataset(data_path + file_3, engine='netcdf4')
 ds4 = xr.open_dataset(data_path + file_4, engine='netcdf4')
 
 # import model parameters
-path_glob = ''.join([cwd, '/../models/data/cal/', cal, '_glob.csv'])
-path_secs = ''.join([cwd, '/../models/data/cal/', cal, '_secs.csv'])
+path_glob = ''.join([cwd, '/data/cal/', cal, '_glob.csv'])
+path_secs = ''.join([cwd, '/data/cal/', cal, '_secs.csv'])
 
 df_glob = pd.read_csv(path_glob, delimiter=',', header=0)
 df_secs = pd.read_csv(path_secs, delimiter=',', header=0, index_col=0)
@@ -234,6 +234,8 @@ fig.subplots_adjust(wspace=0.4, hspace=0.3)
 if save_output:
     fig.savefig(basefile + cal + '_pfig4_investment_paths.png', dpi=400,
                 bbox_inches='tight')
+    print("Figure saved to: {}".format(basefile + cal +
+                                       "_pfig4_investment_paths.png"))
 
 else:
     plt.show()

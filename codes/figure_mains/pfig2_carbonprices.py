@@ -132,7 +132,8 @@ fig.subplots_adjust(wspace=0.25)
 if save_figs:
     fig.savefig(basefile + cal + "_pfig2_carbonprices.png",
                 dpi=400, bbox_inches='tight')
-    print("Figure saved to:\n {}".format(basefile))
+    print("Figure saved to:\n {}".format(basefile + cal +
+                                         '_pfig2_carbonprices.png'))
 
 else:
     plt.show()

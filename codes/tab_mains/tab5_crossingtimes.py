@@ -1,11 +1,11 @@
-"""Plot paths resulting from numerical simulations of decarbonization dates.
+"""Table 5: Warming crossings.
 
 Adam Michael Bauer
 University of Illinois Urbana-Champaign
 World Bank Group
 5.28.2024
 
-To run: python paths.py [cal] [save_output]
+To run: python tab5_crossingtimes.py cal
 """
 
 import os
@@ -18,20 +18,9 @@ import matplotlib.pyplot as plt
 import matplotlib.transforms as mtransforms
 
 from src.expost_paths import get_abatement_path
-from src.presets import get_presets
 
 # parse command line
 cal = sys.argv[1]
-save_output = int(sys.argv[2])
-
-# set presets for plotting
-presets, basefile = get_presets()
-plt.rcParams.update(presets)
-plt.rcParams['text.usetex'] = True
-
-# need color list for this one
-color_list = ['#000000', '#E69F00', '#56B4E9', '#009E73', '#F0E442',
-              '#0072B2', '#D55E00', '#CC79A7']
 
 # import data from simulations
 cwd = os.getcwd()
@@ -72,6 +61,7 @@ delay_amount_ind = -1  # get max delay for display purposes
 Tmax = 150
 dt = 0.0001
 times = np.arange(0, Tmax + dt, dt)
+T0 = 1.424555  # present day climatic temperature
 
 # make array of investment
 a_opt_it = np.zeros((len(df_secs.columns), len(times)))
@@ -159,101 +149,27 @@ for t in range(1, len(times)):
     total_cum_d3[t] = tmp_cum_d3
     total_cum_d4[t] = tmp_cum_d4
 
-fig, ax = plt.subplots(1, 2, figsize=(12, 5.5))
+# print threshold crossings
+b0_t = total_cum_opt * 0.44 * 1e-3 + T0
+b1_t = total_cum_d2 * 0.44 * 1e-3 + T0
+b2_t = total_cum_d3 * 0.44 * 1e-3 + T0
+b3_t = total_cum_d4 * 0.44 * 1e-3 + T0
 
-# define some aesthetic things
-b4_style = 'dotted'
-b4_color = color_list[-1]
+print("Years in optimal case where T < 1.6 deg C: {}".format(times[b0_t <=
+                                                                   1.6][-1] + 2025))
+print("Years in baseline 2 where T < 1.6 deg C: {}".format(times[b1_t <=
+                                                                 1.6][-1] + 2025))
+print("Years in baseline 3 where T < 1.6 deg C: {}".format(times[b2_t <=
+                                                                 1.6][-1] + 2025))
+print("Years in baesline 4 where T < 1.6 deg C: {}".format(times[b3_t <=
+                                                                 1.6][-1] + 2025))
 
-b2_style = 'dashdot'
-b3_style = 'solid'
 
-# plot emissions
-ax[0].plot(times + 2024, total_emis - total_a_opt,
-           label='Policy suite 1:\nFirst-best policy',
-           color='grey', alpha=0.8, linestyle='solid')
-
-# baseline 2
-ax[0].plot(times + 2025,
-           total_emis - total_a_d2_e,
-           linestyle=b2_style,
-           color=color_list[delay_sec1],
-           label='Policy suite 2: Energy\ndecarbonization effort relaxed')
-
-# baseline 3
-ax[0].plot(times + 2025, total_emis - total_a_d3_e,
-           linestyle=b3_style,
-           color=color_list[delay_sec1],
-           label='Policy suite 3: Energy\ndecarbonization effort delayed')
-
-# baseline 4
-ax[0].plot(times + 2025,
-           total_emis - total_a_d4,
-           linestyle=b4_style,
-           color=b4_color,
-           label='Policy suite 4: Economy-wide\ndelay')
-
-# plot implied temperature change
-T0 = 1.424555
-ax[1].plot(times + 2025, total_cum_opt * 0.44 * 1e-3 + T0,
-           color='grey', alpha=0.8, linestyle='solid')
-
-# baseline 2
-ax[1].plot(times + 2025,
-           total_cum_d2 * 0.44 * 1e-3 + T0,
-           linestyle=b2_style,
-           color=color_list[delay_sec1])
-
-# baseline 3
-ax[1].plot(times + 2025, total_cum_d3 * 0.44 * 1e-3 + T0,
-           linestyle=b3_style,
-           color=color_list[delay_sec1])
-
-# baseline 4
-ax[1].plot(times + 2025,
-           total_cum_d4 * 0.44 * 1e-3 + T0,
-           linestyle=b4_style,
-           color=b4_color)
-
-ax[1].axhline(1.7, 0, 2200, linewidth=2,
-              linestyle='dashed', color=color_list[3], zorder=1,
-              label="Temperature target")
-
-labels = ['a)', 'b)']
-for i in range(2):
-    ax[i].set_xlim((2025, 2110))
-    ax[i].set_xticks(ticks=[2025, 2050, 2075, 2100])
-    # ax[i].set_xticks(ticks=[2025, 2040, 2060, 2080, 2100, 2120],
-    #                  minor=True)
-    # ax[i].tick_params(axis='x', which='minor', length=6, width=1)
-
-    trans = mtransforms.ScaledTranslation(0, 0, fig.dpi_scale_trans)
-    ax[i].text(0.9, 0.92, labels[i],
-               transform=ax[i].transAxes
-               + trans,
-               fontsize=20, fontweight='bold',
-               verticalalignment='top',
-               bbox={'facecolor': 'none',
-                     'edgecolor': 'none', 'pad': 1})
-
-ax[0].legend(loc='upper right', fontsize=14)
-ax[1].legend(loc='lower right', fontsize=14)
-
-# set y labels
-ax[0].set_ylabel("Emissions (GtCO$_2$ yr$^{-1}$)")
-ax[1].set_ylabel("Global average temperature above\npreindustrial ($^\circ$C)")
-
-# set x labels
-for i in range(2):
-    ax[i].set_xlabel("Year")
-
-fig.tight_layout()
-
-if save_output:
-    fig.savefig(basefile + cal + '_pfig8_emis_temp.png', dpi=400,
-                bbox_inches='tight')
-    print("Figure saved to: {}".format(basefile + cal + "_pfig8_emis_temp.png"))
-
-else:
-    x = 9
-    #plt.show()
+print("Years in optimal case where T >= 1.7 deg C: {}".format(times[b0_t >=
+                                                                    1.699][0] + 2025))
+print("Years in baseline 2 where T >= 1.7 deg C: {}".format(times[b1_t >=
+                                                                  1.699][0] + 2025))
+print("Years in baseline 3 where T >= 1.7 deg C: {}".format(times[b2_t >=
+                                                                  1.699][0] + 2025))
+print("Years in baesline 4 where T >= 1.7 deg C: {}".format(times[b3_t >=
+                                                                  1.699][0] + 2025))

@@ -171,7 +171,8 @@ fig.tight_layout()
 if save_figs:
     fig.savefig(basefile + cal + "_pfig7_cost_params.png", dpi=400,
                 bbox_inches='tight')
-    print("Figure saved to:\n {}".format(basefile))
+    print("Figure saved to:\n {}".format(basefile + cal +
+                                         "_pfig7_cost_params.png"))
 
 else:
     plt.show()

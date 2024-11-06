@@ -5,7 +5,7 @@ University of Illinois Urbana-Champaign
 World Bank Group
 5.16.2024
 
-To run: python cost_param.py [cal] [save_figs]
+To run: python tab4_scores.py [cal]
 """
 
 import os
@@ -13,7 +13,7 @@ import sys
 
 import numpy as np
 import pandas as pd
-import xarray as xr 
+import xarray as xr
 
 from sklearn.linear_model import LinearRegression
 
