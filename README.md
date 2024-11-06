@@ -2,7 +2,7 @@
 
 By: Adam Michael Bauer -- adammb4 [at] illinois [dot] edu
 
-To cite our working paper that uses these codes: [Bauer, A. M., S. Hallegatte, F. McIsaac. *The Timing Versus Allocation Trade-off in Politically Constrained Climate Policies*. World Bank Policy Research Working Paper No. XXXXX, The World Bank, Washington DC, 2024.](https://www.ambauer.com)
+To cite our working paper that uses these codes: [Bauer, A. M., S. Hallegatte, F. McIsaac. *The Timing Versus Allocation Trade-off in Politically Constrained Climate Policies*. World Bank Policy Research Working Paper No. XXXXX, The World Bank, Washington DC, 2024.](https://www.ambauer.com) (LINK WILL BE UPDATED ONCE WORKING PAPER IS RELEASED!)
 
 # General package overview
 
@@ -23,8 +23,8 @@ Each code is assigned a number corresponding to the figure it creates. Here is t
 | Figure 8: Paths of emissions and temperature rise for different policy suites | `08_timing_of_damages.sh` | - |
 
 The are also two additional files:
-- `run_all.sh` will run all the analytic calculations once, create all the figures, and then run the final files to print out all of the quoted calculations in the paper. 
-- `quoted_numbers.sh` will print all of the quoted figures in the paper.
+- `run_all.sh` will run all the analytic calculations once, create all the figures, and then run the final files to print out all of the quoted calculations and tables in the paper. 
+- `quoted_numbers.sh` will print all of the quoted figures and tables in the paper.
 
 You should consider using the `.yml` file provided in this directory to establish a virtual python environment that should include all of the necessary dependencies for the code to run smoothly. I recommend using `conda` or its improved version, `mamba` to do this. 
 
@@ -40,7 +40,7 @@ As an example, if you want to recreate Figure 1 which shows our calibration of t
 ```
 ./04_optimal_paths.sh
 ```
-Notice the first bit of the above program name, `01_optimal_paths.sh`, matches the figure number we wanted to create, Figure 1.
+Notice the first bit of the above program name, `04_optimal_paths.sh`, matches the figure number we wanted to create, Figure 1.
 
 All figures will be deposited into the `codes/figs` folder. To run indiviudal simulations, you can run any of the files in `simulation_mains`, and to make individual figures, you can run any file in the `figure_mains` folder. **Note:** You should run all scripts from the `codes` directory. As an example, let's say you want to run the `analytic_calcs_2base.py` file in the `ar6_17` calibration, but not save the output. Then in your command line, you'd use:
 ```
@@ -53,5 +53,5 @@ python simulation_mains/analytic_calcs_2base.py ar6_17 1
 
 The hardware of the original author is a 2023 MacBook Pro with an M2 Pro Chip and 16 GB of RAM. 
 
-Last edited: 21 October, 2024.
+Last edited: 6 November, 2024.
 
